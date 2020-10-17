@@ -41,13 +41,13 @@ func execmDurationNanoseconds(_ int, p *gop.Context) {
 
 func execmDurationMicroseconds(_ int, p *gop.Context) {
 	args := p.GetArgs(1)
-	ret0 := args[0].(time.Duration).Microseconds()
+	ret0 := float64(args[0].(time.Duration).Nanoseconds()) / 1e6
 	p.Ret(1, ret0)
 }
 
 func execmDurationMilliseconds(_ int, p *gop.Context) {
 	args := p.GetArgs(1)
-	ret0 := args[0].(time.Duration).Milliseconds()
+	ret0 := float64(args[0].(time.Duration).Nanoseconds()) / 1e6
 	p.Ret(1, ret0)
 }
 

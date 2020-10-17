@@ -92,7 +92,7 @@ func ProfileReport() {
 		if time == 0 {
 			break
 		}
-		fmt.Println("op:", op, "time(ms):", time.Milliseconds(), "calls:", opCalls[op])
+		fmt.Println("op:", op, "time(ms):", float64(time.Nanoseconds())/1e6, "calls:", opCalls[op])
 	}
 	fmt.Println("Generating instr profile information:")
 	sortedInstrs := sortInstrCalls()
@@ -103,7 +103,7 @@ func ProfileReport() {
 	for i := 0; i < n; i++ {
 		item := sortedInstrs[i]
 		info, p1, p2 := DecodeInstr(item.i)
-		time := item.dur.Milliseconds()
+		time := float64(item.dur.Nanoseconds()) / 1e6
 		fmt.Println("instr:", item.i, "op:", info.Name, "params:", p1, p2, "time(ms):", time, "calls:", item.calls)
 	}
 }
